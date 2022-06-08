@@ -82,6 +82,7 @@ class CustomTextField extends StatelessWidget {
       controller: textController,
       onEditingComplete: onEditComplete as void Function()?,
       maxLines: obscureText ? 1 : maxLines,
+      autofocus: true,
     );
   }
 }
