@@ -90,6 +90,12 @@ class _MapBoxAutoCompleteWidgetState extends State<MapBoxAutoCompleteWidget> {
     widget.onSelect!(prediction);
     if (widget.closeOnSelect) Navigator.pop(context);
   }
+  
+  @override
+  void dispose() {
+    _searchFieldTextFocus.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
