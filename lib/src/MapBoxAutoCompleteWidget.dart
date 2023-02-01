@@ -31,8 +31,10 @@ class MapBoxAutoCompleteWidget extends StatefulWidget {
   ///
   /// Check the full list of [supported countries](https://docs.mapbox.com/api/search/) for the MapBox API
   final String? country;
-  
+
   final String? types;
+
+  final List<double>? bbox;
 
   MapBoxAutoCompleteWidget({
     required this.apiKey,
@@ -44,6 +46,7 @@ class MapBoxAutoCompleteWidget extends StatefulWidget {
     this.limit,
     this.country,
     this.types,
+    this.bbox,
   });
 
   @override
@@ -70,6 +73,9 @@ class _MapBoxAutoCompleteWidgetState extends State<MapBoxAutoCompleteWidget> {
       if (widget.types != null) {
         url += "&types=${widget.types}";
       }
+      if (widget.bbox != null) {
+        url += "&bbox=${widget.bbox}";
+      }
       final response = await http.get(Uri.parse(url));
       // print(response.body);
       // // final json = jsonDecode(response.body);
@@ -90,7 +96,7 @@ class _MapBoxAutoCompleteWidgetState extends State<MapBoxAutoCompleteWidget> {
     widget.onSelect!(prediction);
     if (widget.closeOnSelect) Navigator.pop(context);
   }
-  
+
   @override
   void dispose() {
     _searchFieldTextFocus.dispose();
